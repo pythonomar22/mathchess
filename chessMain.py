@@ -1,8 +1,9 @@
 import pygame as p
+import numpy as np
 import chessEngine
 
 WIDTH = HEIGHT = 512
-DIMENSION = 8
+DIMENSION = 4
 SQ_SIZE = HEIGHT // DIMENSION
 MAX_FPS = 60
 IMAGES = {}
@@ -16,7 +17,7 @@ Initialize directory of images in a dict
 def loadImages():
     pieces = ['bB', 'bK', 'bN', 'bp', 'bQ', 'bR', 'wB', 'wK', 'wN', 'wp', 'wQ', 'wR']
     for piece in pieces:
-        IMAGES[piece] = p.transform.scale(p.image.load('C:/Users/omara/OneDrive/Desktop/chess/images/' + piece + '.png'), (55, 55))
+        IMAGES[piece] = p.transform.scale(p.image.load('C:/Users/omara/OneDrive/Desktop/mathchess/images/' + piece + '.png'), (105, 105))
 
 def main():
     p.init()
@@ -63,8 +64,6 @@ def main():
         if moveMade:
             validMoves = gs.getValidMoves()
             moveMade = False
-                
-
         clock.tick(MAX_FPS)
         p.display.flip()
         drawGameState(screen, gs)
@@ -81,6 +80,7 @@ def drawBoard(screen):
             p.draw.rect(screen, color, p.Rect(c*SQ_SIZE, r*SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
 def drawPieces(screen, board):
+    # pieceOptions = np.random.choice(pieceList, 15, replace = False)
     for r in range(DIMENSION):
         for c in range(DIMENSION):
             piece = board[r][c]
